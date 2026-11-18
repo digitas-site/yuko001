@@ -1,0 +1,77 @@
+.sidebar .agent-nav{display:flex;align-items:flex-start;line-height:1.55}
+.agent-nav .nav-icon{flex:none}
+.agent-nav small{display:block;font-size:.86rem;font-weight:500}
+.jarvis{margin-top:14px;overflow:hidden}
+.agent-stage{
+  --signal:#6fe9ff;
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+  color:#e9f8fb;
+  background:
+    radial-gradient(ellipse at 50% 48%,#0b3244 0,transparent 58%),
+    repeating-linear-gradient(0deg,transparent 0 31px,#77dfed13 31px 32px),
+    repeating-linear-gradient(90deg,transparent 0 31px,#77dfed13 31px 32px),
+    #050d17;
+}
+.agent-stage[data-phase=listening]{--signal:#92fff3}
+.agent-stage[data-phase=processing]{--signal:#dcbbff}
+.agent-stage[data-phase=success]{--signal:#a6ffd0}
+.agent-stage[data-phase=error]{--signal:#ffc1a7}
+.agent-stage-head{position:relative;z-index:1;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;padding:20px 22px 0}
+.agent-stage-head p{color:#b6cdd7;font-size:.9rem;margin-top:4px}
+.agent-stage button{background:#142836;color:#eaf9ff;border-color:#477483}
+.agent-stage button:hover:not(:disabled){background:#254358}
+.agent-stage button:disabled{opacity:.5;cursor:default}
+#motion-toggle{font-size:.875rem;white-space:nowrap}
+.agent-console{
+  display:grid;
+  grid-template-columns:minmax(125px,168px) minmax(0,1fr) minmax(125px,168px);
+  gap:12px;
+  align-items:start;
+  padding:18px 22px 0;
+}
+.agent-visual{position:relative;display:grid;place-items:center;width:min(100%,450px);margin:-13px auto -5px;aspect-ratio:1}
+.agent-visual canvas{position:relative;width:100%;height:auto;display:block}
+.agent-glow{position:absolute;inset:23%;border-radius:50%;background:radial-gradient(ellipse,var(--signal),transparent 65%);opacity:.15;animation:breathe 5s ease-in-out infinite alternate}
+.agent-stage[data-phase=listening] .agent-glow{animation-duration:1.3s}
+.agent-stage[data-phase=success] .agent-glow{opacity:.24}
+.agent-stage[data-paused=true] .agent-glow{animation-play-state:paused}
+.agent-panel{padding:12px 11px;border:1px solid #37606e;border-radius:10px;background:#071522ed;box-shadow:inset 0 1px #93f4ff20}
+.agent-panel h3{margin:0 0 7px;font-size:.875rem;color:#9eeaf0;letter-spacing:.04em}
+.agent-panel dl{margin:0}
+.agent-panel dl div{display:flex;flex-wrap:wrap;justify-content:space-between;gap:3px 6px;padding:6px 0;border-top:1px solid #36566a80;font-size:.875rem}
+.agent-panel dt{color:#bccee0}
+.agent-panel dd{margin:0;color:#f1f9ff;font-weight:700}
+.agent-panel-left #agent-panel-phase{color:var(--signal)}
+.agent-controls{display:grid;justify-items:center;gap:10px;padding:0 20px 18px;margin-top:-10px;position:relative}
+.agent-phase{display:inline-flex;align-items:center;gap:8px;color:var(--signal);border:1px solid #52818a;border-radius:30px;padding:4px 12px;background:#0c1d2a;font-weight:750;font-size:.875rem}
+.agent-phase i{width:7px;height:7px;border-radius:50%;background:currentColor;box-shadow:0 0 9px currentColor}
+.agent-mic{justify-content:center;width:auto}
+.agent-mic #listen{background:#a1f4e7;color:#0b2a2a;border-color:#a1f4e7}
+.agent-mic #listen:hover:not(:disabled){background:#c5fff4}
+.voice-status{color:#c7dbe6;text-align:center;font-size:.9rem;min-height:1.4em}
+.voice-body{margin:0 auto 20px;width:min(calc(100% - 44px),740px);padding:13px;display:grid;gap:10px;background:#071522ed;border:1px solid #37606e;border-radius:10px}
+.voice-body .sub{color:#b6cdd7}
+.voice-body textarea{background:#0b1e2c;color:#eefaff;border-color:#477483}
+.voice-body textarea::placeholder{color:#9ab5c5}
+.voice-body label{display:grid;gap:6px;font-weight:700}
+.voice-body textarea{width:100%;min-height:74px}
+.voice-results{margin:0;padding-left:22px;overflow-wrap:anywhere;color:#a6ffd0}
+@keyframes breathe{from{transform:scale(.8);opacity:.10}to{transform:scale(1.16);opacity:.24}}
+
+@media(prefers-reduced-motion:reduce){
+  .agent-stage:not([data-paused=false]) .agent-glow{animation:none}
+}
+@media(max-width:1000px){
+  .agent-console{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .agent-visual{grid-column:1/-1;grid-row:1;width:min(100%,380px)}
+  .agent-controls{margin-top:12px}
+}
+@media(max-width:600px){
+  .agent-nav small{display:inline;font-size:.8rem}
+  .agent-stage-head,.agent-console{padding-left:14px;padding-right:14px}
+  .agent-controls{margin-top:4px}
+  .voice-body{width:calc(100% - 28px)}
+  .agent-stage-head p{font-size:.85rem}
+}
